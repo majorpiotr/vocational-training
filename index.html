@@ -2,11 +2,90 @@
 <html>
 <head>
 	<title></title>
+<!-- UIkit CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.23/css/uikit.min.css" />
+
+<!-- UIkit JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.23/js/uikit.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.23/js/uikit-icons.min.js"></script>
+<!-- my css from -->
 <link rel="stylesheet" href="css/style.css" >
 <script src="js/script.js"></script>
+
 </head>
 
 <body>
+	<section style="background-image: url('backgrounds/usa/Manhattan_Skyline_Panoramic_Black_and_White_Photograph.jpg');">
+	
+		 <div class="uk-container uk-container-small uk-padding-small uk-padding-remove-top" >
+		<nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+            <div class="uk-navbar-left">
+                <ul class="uk-navbar-nav">
+                    <li class="uk-active"><a href="#">Active</a></li>
+                    <li><a href="#">Item</a></li>
+                    <li>
+                        <a href="#">Parent</a>
+                        <div class="uk-navbar-dropdown">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li class="uk-active"><a href="#">Active</a></li>
+                                <li><a href="#">Item</a></li>
+                                <li class="uk-nav-header">Header</li>
+                                <li><a href="#">Item</a></li>
+                                <li><a href="#">Item</a></li>
+                                <li class="uk-nav-divider"></li>
+                                <li><a href="#">Item</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <p class="uk-h4">Default</p>
+            </div>
+        </nav>
+	</nav>
+<ul class="uk-pagination uk-flex-center" uk-margin>
+    <li><a href="#"><span uk-pagination-previous></span></a></li>
+    <li><a href="#">1</a></li>
+    <li class="uk-disabled"><span>...</span></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">6</a></li>
+    <li class="uk-active"><span>7</span></li>
+    <li><a href="#">8</a></li>
+    <li><a href="#"><span uk-pagination-next></span></a></li>
+</ul>
+<div class="uk-child-width-expand@s uk-text-center" uk-grid>
+		 	<div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s" uk-grid>
+    <div class="uk-card-media-left uk-cover-container">
+        <img src="question_img/dog.jpg" alt="" class="zoomable" uk-cover>
+        <canvas width="600" height="400"></canvas>
+    </div>
+    <div>
+        <div class="uk-card-body">
+            <h3 class="uk-card-title">Media Left</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+        </div>
+    </div>
+</div>
+</div>
+<div class="uk-child-width-expand@s uk-text-center" uk-grid>
+		 	<div class="uk-card uk-card-default uk-margin-right uk-padding-small zoomable">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		 	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		 	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		 	consequat.</div>
+
+			<div class="uk-card uk-card-primary uk-margin-right uk-padding-small zoomable">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. </div>
+
+			<div class="uk-card uk-card-secondary uk-padding-small zoomable ">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat.</div>
+	</div>	 
+
+		 </div>
+		 </div>
+	</section>
 
 </body>
 </html>
