@@ -1,0 +1,6 @@
+<question>
+  <title>Test Question 1 - Title</title>
+  <to_do>What can you see on the picture below</to_do>
+  <correct>dog</correct>
+  <img_src>question_img/dog.jpg</img_src>
+</question> 

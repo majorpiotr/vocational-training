@@ -2,6 +2,8 @@
 <html>
 <head>
 	<title></title>
+<!-- jquery: -->
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <!-- UIkit CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.23/css/uikit.min.css" />
 
@@ -10,7 +12,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.23/js/uikit-icons.min.js"></script>
 <!-- my css from -->
 <link rel="stylesheet" href="css/style.css" >
-<script src="js/script.js"></script>
+<!-- <script src="js/script.js"></script>
+  -->
+
+ <script src="check_answer.js"></script>
 
 </head>
 
@@ -38,50 +43,81 @@
                         </div>
                     </li>
                 </ul>
-                <p class="uk-h4">Default</p>
             </div>
         </nav>
 	</nav>
-<ul class="uk-pagination uk-flex-center" uk-margin>
-    <li><a href="#"><span uk-pagination-previous></span></a></li>
-    <li><a href="#">1</a></li>
-    <li class="uk-disabled"><span>...</span></li>
-    <li><a href="#">5</a></li>
-    <li><a href="#">6</a></li>
-    <li class="uk-active"><span>7</span></li>
-    <li><a href="#">8</a></li>
-    <li><a href="#"><span uk-pagination-next></span></a></li>
-</ul>
-<div class="uk-child-width-expand@s uk-text-center" uk-grid>
+	<div class="uk-text-center">
+		        <p class="uk-h4"  id="question_title" >Default</p>
+		        <progress id="js-progressbar" class="uk-progress" value="10" max="100"></progress>
+
+<script>
+
+    UIkit.util.ready(function () {
+
+        var bar = document.getElementById('js-progressbar');
+
+        var animate = setInterval(function () {
+
+            bar.value += 10;
+
+            if (bar.value >= bar.max) {
+                clearInterval(animate);
+            }
+
+        }, 1000);
+
+    });
+
+</script>
+<div class="uk-grid-small uk-child-width-auto" uk-grid uk-countdown="date: 2018-11-28T21:24:02+00:00">
+    <div>
+        <div class="uk-countdown-number uk-countdown-days"></div>
+        <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s">Days</div>
+    </div>
+    <div class="uk-countdown-separator">:</div>
+    <div>
+        <div class="uk-countdown-number uk-countdown-hours"></div>
+        <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s">Hours</div>
+    </div>
+    <div class="uk-countdown-separator">:</div>
+    <div>
+        <div class="uk-countdown-number uk-countdown-minutes"></div>
+        <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s">Minutes</div>
+    </div>
+    <div class="uk-countdown-separator">:</div>
+    <div>
+        <div class="uk-countdown-number uk-countdown-seconds"></div>
+        <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s">Seconds</div>
+    </div>
+</div>
+</div>
+<div class="uk-child-width-expand@s uk-text-center"uk-grid>
 		 	<div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s" uk-grid>
     <div class="uk-card-media-left uk-cover-container">
-        <img src="question_img/dog.jpg" alt="" class="zoomable" uk-cover>
+        <img  alt="" class="zoomable" id="question_img" uk-cover>
         <canvas width="600" height="400"></canvas>
     </div>
     <div>
         <div class="uk-card-body">
-            <h3 class="uk-card-title">Media Left</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+            <h3 class="uk-card-title" >Media Left</h3>
+            <p id="to_do">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
         </div>
     </div>
 </div>
 </div>
-<div class="uk-child-width-expand@s uk-text-center" uk-grid>
-		 	<div class="uk-card uk-card-default uk-margin-right uk-padding-small zoomable">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		 	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		 	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		 	consequat.</div>
+<form>
+    <fieldset class="uk-fieldset">
 
-			<div class="uk-card uk-card-primary uk-margin-right uk-padding-small zoomable">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. </div>
+        <legend class="uk-legend uk-text-center">Answer</legend>
 
-			<div class="uk-card uk-card-secondary uk-padding-small zoomable ">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat.</div>
-	</div>	 
+        <div class="uk-margin">
+            <input  class="uk-input" type="text" placeholder="Input" id="user_answear" ></input>
+            <div class="uk-button uk-button-primary uk-button-small" id="submit_it">Small button</div>
+        </div>
+
+    </fieldset>
+</form>
+ 
 
 		 </div>
 		 </div>
