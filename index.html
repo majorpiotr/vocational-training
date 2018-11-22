@@ -48,45 +48,18 @@
 	</nav>
 	<div class="uk-text-center">
 		        <p class="uk-h4"  id="question_title" >Default</p>
-		        <progress id="js-progressbar" class="uk-progress" value="10" max="100"></progress>
+		        <progress id="js-progressbar" class="uk-progress" value="0" max="100"></progress>
 
-<script>
 
-    UIkit.util.ready(function () {
-
-        var bar = document.getElementById('js-progressbar');
-
-        var animate = setInterval(function () {
-
-            bar.value += 10;
-
-            if (bar.value >= bar.max) {
-                clearInterval(animate);
-            }
-
-        }, 1000);
-
-    });
-
-</script>
-<div class="uk-grid-small uk-child-width-auto" uk-grid uk-countdown="date: 2018-11-28T21:24:02+00:00">
+<div class="uk-grid-small uk-child-width-auto" uk-grid 
+id="countdown_clock">
     <div>
-        <div class="uk-countdown-number uk-countdown-days"></div>
-        <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s">Days</div>
-    </div>
-    <div class="uk-countdown-separator">:</div>
-    <div>
-        <div class="uk-countdown-number uk-countdown-hours"></div>
-        <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s">Hours</div>
-    </div>
-    <div class="uk-countdown-separator">:</div>
-    <div>
-        <div class="uk-countdown-number uk-countdown-minutes"></div>
+        <div class="uk-countdown-number uk-countdown-minutes" id="clock_minutes"></div>
         <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s">Minutes</div>
     </div>
     <div class="uk-countdown-separator">:</div>
     <div>
-        <div class="uk-countdown-number uk-countdown-seconds"></div>
+        <div class="uk-countdown-number uk-countdown-seconds" id="clock_seconds"></div>
         <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s">Seconds</div>
     </div>
 </div>
@@ -112,6 +85,13 @@
 
         <div class="uk-margin">
             <input  class="uk-input" type="text" placeholder="Input" id="user_answear" ></input>
+ <ul class="uk-list answear_list uk-text-center">
+    <li id="try_1">Try 1</li>
+    <li id="try_2">Try 2</li>
+    <li id="try_3">Try 3</li>
+</ul>
+
+
             <div class="uk-button uk-button-primary uk-button-small" id="submit_it">Small button</div>
         </div>
 
