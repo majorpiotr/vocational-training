@@ -9,12 +9,13 @@ question_numer=1;
 past_answears = [];
 progress_array = [0, 0];
 
+//$("#modal-example").show();
 //data: [20, 10];
 var ctx = $(".myChart");
 var myBarChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
-        labels: ["Answer's"],
+        labels: ["Correct","Wrong"],
         datasets: [{
             label: '# of Votes',
             data: progress_array,
@@ -29,37 +30,6 @@ var myBarChart = new Chart(ctx, {
             borderWidth: 1
         }]
     }
-
-    /*,
-    options: {
-       /* scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true,
-                    barPercentage: 1
-                }
-            }]
-        }*/
-        /*
-        scales: {
-            xAxes: [{
-                stacked: true,
-                ticks: {
-                max:100,	
-                beginAtZero: true
-            }
-            }],
-            yAxes: [{
-                stacked: true,
-                ticks: {
-                max:100,
-                beginAtZero: true
-            }
-            }]
-        }
-    }
-*/
-   // options: options
 });
 function reset_clock()
 {
@@ -67,18 +37,7 @@ function reset_clock()
 	end_date = new Date(Date.now()+600000);
 	$("#countdown_clock").attr("uk-countdown", "date: " + end_date );
 }
-$.ajax({
-    type: "GET",
-    url: "questions_text/1.xml",
-    dataType: "xml",
-    success: function(xml){
-    $( "#question_title" ).text($(xml).find("title").text());
-   	$( "#to_do").text($(xml).find("to_do").text());
-   	$( "#question_img").attr("src",$(xml).find("img_src").text());
-   	correct_answer=$(xml).find("correct").text();
-   	reset_clock();
-    }
-  });
+
 
 
 
@@ -109,9 +68,17 @@ function mark_speeling( ans_a , ans_b )
 	}
 }
 */ 
+function speak(to_speak)
+{
+	responsiveVoice.speak(to_speak);
+}
 function go_to_next(question_numer)
 {
+	$("#question_card").css("animation-name", "rotated-90_anim");
+	$("#question_card").css("animation-duration", "4s");
 	UIkit.countdown("#countdown_clock").stop(); // stop the clock during loading next question
+	$(".try_list").text("");
+	$("#dont_repead").text("");
 	question_url = "questions_text/";
 	question_url += question_numer;
 	question_url += ".xml";
@@ -121,21 +88,26 @@ function go_to_next(question_numer)
     dataType: "xml",
     success: function(xml){
     $( "#question_title" ).text($(xml).find("title").text());
+   	if ($( "#to_do").text() != $(xml).find("to_do").text())
+   	{	
    	$( "#to_do").text($(xml).find("to_do").text());
+   	speak($("#to_do").text());
+   	}
    	$( "#question_img").attr("src",$(xml).find("img_src").text());
    	correct_answer=$(xml).find("correct").text();
    	UIkit.countdown("#countdown_clock").start();//it starts the clock again, since new question has been loaded
     }})
-
+	$("#question_card").css("animation-name", "un_rotated-90_anim");
+	$("#question_card").css("animation-duration", "4s");	
 }
 
-function draw_minichart()
+function draw_minichart(where)
 {
-	var ctx_copy = $(".myBarChart_copy");
+	var ctx_copy = $("#mini_chart_" + where);
 	var myBarChart_copy = new Chart(ctx_copy , {
     type: 'doughnut',
     data: {
-        labels: ["Answer's"],
+        labels: ["Correct","Wrong"],
         datasets: [{
             label: '# of Votes',
             data: progress_array,
@@ -153,8 +125,14 @@ function draw_minichart()
 }
 function check_answear( ans_a, ans_b )
 {
-
-if (ans_a.toLowerCase().trim() == ans_b.toLowerCase().trim()) 
+ans_a = ans_a.trim().toLowerCase().split(" ");
+if (ans_a[0]=="the" || ans_a[0]=="a")
+{
+	ans_a[0] = "";
+	ans_a = ans_a.join("");
+}
+//alert(ans_a);
+if (ans_a == ans_b) 
 {
 	//alert("Your answear is correct :)");
 	past_answears = [];
@@ -164,27 +142,22 @@ if (ans_a.toLowerCase().trim() == ans_b.toLowerCase().trim())
 	//$("#js-progressbar").attr("value",val);
 	question_numer++;
 	go_to_next(question_numer);
-	progress_array[0]=progress_array[0]+10;
+	progress_array[0]=progress_array[0]+1;
 	
 myBarChart.update();	
-	UIkit.notification({message: ans_a + '  - is the correct answear. ' + '<br> So proud of you' + ' User_name' + '<BR>'+  '<canvas class="myBarChart_copy" width="40" height="40"></canvas>' , status: 'success',timeout: 1000});
- //$(".myBarChart_copy").append($(".myChart").html());
-
-draw_minichart();
-
-//$(".myBarChart_copy").html($(".myChart").clone());
-
-	//if ($("#js-progressbar").attr("value") == 100) 
-	//{
-	//UIkit.notification({message:'Test has been done :)', status: 'danger'});	
-	//}
+	UIkit.notification.closeAll();
+	UIkit.notification({message: ans_a + '  - is the correct answear. ' + '<br> So proud of you' + ' User_name' + '<BR>'+  '<canvas class="myBarChart_copy"' + "id='mini_chart_" + question_numer + "'  " +' width="40" height="40"></canvas>' ,pos: 'top-left', status: 'success',timeout: 1500});
+draw_minichart(question_numer);
+speak(ans_a + " is the correct answear");
 
 }
 else
 {
 	if (!past_answears.includes(ans_a))
 	{
-	UIkit.notification({message: ans_a + '  - is completely not correct', status: 'danger',timeout:1000});
+	UIkit.notification.closeAll();
+	UIkit.notification({message: ans_a + '  - is completely not correct', status: 'danger',timeout:1500});
+	responsiveVoice.speak(ans_a + "is completely not correct");
 	if (try_number <= 3 )
 	{
 
@@ -196,19 +169,25 @@ else
 	else
 	{
 			$("#user_answear").val("");
-			UIkit.notification({message: 'You have answeared 3 times incorrectly. Lets skip this question' +  '<canvas class="myBarChart_copy" width="40" height="40"></canvas>', status: 'danger',pos: 'bottom-center',timeout:3000});
+			UIkit.notification.closeAll();
+			UIkit.notification({message: 'You have answered 3 times incorrectly. Lets skip this question' + '<canvas class="myBarChart_copy"' + "id='mini_chart_" + question_numer + "'  " +' width="40" height="40"></canvas>' , status: 'danger',pos: 'top-left',timeout:1500});
+			progress_array[1]=progress_array[1]+1;
+			draw_minichart(question_numer);
 			question_numer++;
 			go_to_next(question_numer);
-			progress_array[1]=progress_array[1]+10;
-
+			responsiveVoice.speak("You have answered 3 times incorrectly. Lets skip this question");
+			
 	myBarChart.update();
-draw_minichart();
 	}
 	}
 	else
 	{
-					UIkit.notification({message: ans_a + '<br> was not, and never will be the correct answear for this :(', status: 'danger',pos: 'top-right'});
-					UIkit.notification({message: 'The definition of insanity is doing the same thing over and over again and expecting a different result.', status: 'danger',pos: 'top-left'});
+					UIkit.notification.closeAll();
+					UIkit.notification({message: ans_a + '<br> <B>was not</B>, and <B>never will</B> be the correct answer for this :(', status: 'danger',pos: 'top-right'});
+					UIkit.notification({message: '<blockquote class = "uk-text-danger">The definition of <B>insanity</B> is doing the same thing over and over again and expecting a different result.</blockquote>'+ '<footer>Arbert Einstein</footer>' + '<br> <img src="einstein.jpg"> ', status: 'danger',pos: 'top-left'});
+					$("#user_answear").val("");
+					$("#dont_repead").append("<li>remember it is not a " + ans_a + ":)</li>");
+					responsiveVoice.speak(ans_a + "will be never the correct answer for this");
 	}
 
 }
@@ -230,6 +209,84 @@ $("#user_answear").keypress(function (e) {
     return false;    //<---- Add this line
   }
 });
+if (annyang) {
+  // Let's define our first command. First the text we expect, and then the function it should call
+  //alert("something works");
+  var commands = {
+   	'I can see *tag': function(tag) {
+      //if (input.trim()!= "" ) //it checks if input is not empty
+		//{
+  		//check_answear( $("#user_answear").val() , correct_answer );
+   		$("#user_answear").val(tag);
+   		alert("I can hear you. I can see" + tag);
 
-//$("#question_img").load("question_img/dog.jpg");
+		//}
+    },
+   	'is': function() {
+      //if (input.trim()!= "" ) //it checks if input is not empty
+		//{
+  		//check_answear( $("#user_answear").val() , correct_answer );
+   		 //$("#user_answear").val(tag);
+   		alert("I can hear you. It is");
+
+		//}
+    },
+    'next': function() {
+     // if (input.trim()!= "" ) //it checks if input is not empty
+		//{
+  		check_answear( $("#user_answear").val() , correct_answer );
+   		//alert("I can hear you. NEXT");
+
+		//}
+    },
+    'enter': function() {
+      //if (input.trim()!= "" ) //it checks if input is not empty
+		//{
+  		//check_answear( $("#user_answear").val() , correct_answer );
+   		alert("I can hear you. enter");
+
+		//}
+    },
+    'ok': function() {
+      //if (input.trim()!= "" ) //it checks if input is not empty
+		//{
+  		//check_answear( $("#user_answear").val() , correct_answer );
+  		alert("I can hear you. OK");
+		//}
+    },
+    'fuck': function() {
+      //if (input.trim()!= "" ) //it checks if input is not empty
+		//{
+  		//check_answear( $("#user_answear").val() , correct_answer );
+  		alert("I can hear you. fuck");
+		//}
+    },
+    'hello': function() {
+      //if (input.trim()!= "" ) //it checks if input is not empty
+		//{
+  		//check_answear( $("#user_answear").val() , correct_answer );
+  		alert("I can hear you. hello");
+		//}
+    }
+  };
+
+  // Add our commands to annyang
+  annyang.addCommands(commands);
+
+  // Start listening. You can call this here, or attach this call to an event, button, etc.
+  annyang.start();
+}
+function welcome()
+{
+UIkit.modal("#modal-example").show();
+speak($("#welcome_text").text() + " ! "+ $("#welcome_form").text());
+$("#go").click(function(){
+UIkit.modal("#modal-example").hide();;
+reset_clock();
+go_to_next(question_numer);
+
+});
+}
+
+welcome();
 });

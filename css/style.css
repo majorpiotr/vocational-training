@@ -221,6 +221,38 @@ transition-property: transform;
       -webkit-transform: rotateZ(170deg); /* Safari */
       transform: rotateZ(170deg); /* Standard syntax */
 }
+@keyframes rotated-90_anim
+{
+  0%
+  {
+    -webkit-transform: rotateY(1deg); /* Safari */
+    transform: rotateY(1deg); /* Standard syntax */
+  }
+  100%
+  {
+    -webkit-transform: rotateY(90deg); /* Safari */
+      transform: rotateY(90deg); /* Standard syntax */
+      -webkit-transform-style: preserve-3d; /* Safari 3-8  */    
+      transform-style: preserve-3d;
+  }
+}
+
+@keyframes un_rotated-90_anim
+{
+  0%
+  {
+      -webkit-transform: rotateY(90deg); /* Safari */
+      transform: rotateY(90deg); /* Standard syntax */
+      -webkit-transform-style: preserve-3d; /* Safari 3-8  */    
+      transform-style: preserve-3d;
+  }
+  100%
+  {
+    -webkit-transform: rotateY(0deg); /* Safari */
+    transform: rotateY(0deg); /* Standard syntax */
+  }
+}
+
 .rotated-270
 {
       -webkit-transform: rotateY(270deg); /* Safari */

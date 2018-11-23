@@ -6,7 +6,10 @@
  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <!-- UIkit CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.23/css/uikit.min.css" />
-
+<!-- responsivevoice.js-speaking abilities -->
+<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+<!-- annyang.js for voice input -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
 <!-- UIkit JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.23/js/uikit.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.23/js/uikit-icons.min.js"></script>
@@ -57,6 +60,16 @@
                     
                 </div>
             -->
+            <div id="modal-example" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <h2 class="uk-modal-title" id ="welcome_text">Welcome</h2>
+        <p id="welcome_form">What is your name?</p>
+        <p class="uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+            <div class="uk-button uk-button-primary" id="go" type="button">Go</div>
+        </p>
+    </div>
+</div>
 
 <div class="uk-grid-small uk-child-width-auto" uk-grid 
 id="countdown_clock">
@@ -71,16 +84,26 @@ id="countdown_clock">
     </div>
 </div>
 </div>
-<div class="uk-child-width-expand@s uk-text-center"uk-grid>
-		 	<div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s" uk-grid>
+<div class="uk-child-width-expand@s uk-text-center perspective-100"uk-grid >
+		 	<div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s" id="question_card" uk-grid>
     <div class="uk-card-media-left uk-cover-container">
         <img  alt="" class="zoomable" id="question_img" uk-cover>
         <canvas width="600" height="400"></canvas>
     </div>
     <div>
         <div class="uk-card-body">
-            <h3 class="uk-card-title" >Media Left</h3>
-            <p id="to_do">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+            <h3 class="uk-card-title" ></h3>
+            <p id="to_do"></p>
+            <p>
+                <ul class="uk-list answear_list uk-text-center">
+    <li class="try_list" id="try_1"></li>
+    <li class="try_list" id="try_2"></li>
+    <li class="try_list" id="try_3"></li>
+</ul>
+            </p>
+            <ul class="uk-list answear_list uk-text-center" id="dont_repead">
+            
+            </ul>
         </div>
     </div>
 </div>
@@ -92,12 +115,7 @@ id="countdown_clock">
 
         <div class="uk-margin">
             <input  class="uk-input" type="text" placeholder="Input" id="user_answear" ></input>
- <ul class="uk-list answear_list uk-text-center">
-    <li id="try_1">Try 1</li>
-    <li id="try_2">Try 2</li>
-    <li id="try_3">Try 3</li>
-</ul>
-
+ 
 
             <div class="uk-button uk-button-primary uk-button-small" id="submit_it">Small button</div>
         </div>
@@ -110,7 +128,7 @@ id="countdown_clock">
 		 </div>
            <!--for chart.js -->
              <canvas class="myChart" width="400" height="40"></canvas>
-             
+
 
 
 	</section>
