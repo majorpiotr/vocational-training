@@ -10,7 +10,10 @@
 <!-- UIkit JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.23/js/uikit.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.23/js/uikit-icons.min.js"></script>
+<!-- chart.js experimental -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <!-- my css from -->
+
 <link rel="stylesheet" href="css/style.css" >
 <!-- <script src="js/script.js"></script>
   -->
@@ -48,8 +51,12 @@
 	</nav>
 	<div class="uk-text-center">
 		        <p class="uk-h4"  id="question_title" >Default</p>
-		        <progress id="js-progressbar" class="uk-progress" value="0" max="100"></progress>
-
+		     <!--
+                <div class="uk-progress" >
+                    <progress id="js-progressbar" class="uk-progress" value="10" max="100">10</progress>
+                    
+                </div>
+            -->
 
 <div class="uk-grid-small uk-child-width-auto" uk-grid 
 id="countdown_clock">
@@ -101,6 +108,11 @@ id="countdown_clock">
 
 		 </div>
 		 </div>
+           <!--for chart.js -->
+             <canvas class="myChart" width="400" height="40"></canvas>
+             
+
+
 	</section>
 
 </body>
