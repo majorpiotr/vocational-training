@@ -225,13 +225,13 @@ transition-property: transform;
 {
   0%
   {
-    -webkit-transform: rotateY(1deg); /* Safari */
-    transform: rotateY(1deg); /* Standard syntax */
+    -webkit-transform: rotateX(0deg); /* Safari */
+    transform: rotateX(0deg); /* Standard syntax */
   }
   100%
   {
-    -webkit-transform: rotateY(90deg); /* Safari */
-      transform: rotateY(90deg); /* Standard syntax */
+    -webkit-transform: rotateX(90deg); /* Safari */
+      transform: rotateX(90deg); /* Standard syntax */
       -webkit-transform-style: preserve-3d; /* Safari 3-8  */    
       transform-style: preserve-3d;
   }
@@ -241,15 +241,15 @@ transition-property: transform;
 {
   0%
   {
-      -webkit-transform: rotateY(90deg); /* Safari */
-      transform: rotateY(90deg); /* Standard syntax */
+      -webkit-transform: rotateX(-90deg); /* Safari */
+      transform: rotateX(-90deg); /* Standard syntax */
       -webkit-transform-style: preserve-3d; /* Safari 3-8  */    
       transform-style: preserve-3d;
   }
   100%
   {
-    -webkit-transform: rotateY(0deg); /* Safari */
-    transform: rotateY(0deg); /* Standard syntax */
+    -webkit-transform: rotateZ(0deg); /* Safari */
+    transform: rotateZ(0deg); /* Standard syntax */
   }
 }
 

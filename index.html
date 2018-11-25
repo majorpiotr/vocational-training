@@ -9,7 +9,7 @@
 <!-- responsivevoice.js-speaking abilities -->
 <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
 <!-- annyang.js for voice input -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
 <!-- UIkit JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.23/js/uikit.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.23/js/uikit-icons.min.js"></script>
@@ -62,11 +62,35 @@
             -->
             <div id="modal-example" uk-modal>
     <div class="uk-modal-dialog uk-modal-body">
+        <p class="error" id="welcome_error_message"></p>
         <h2 class="uk-modal-title" id ="welcome_text">Welcome</h2>
         <p id="welcome_form">What is your name?</p>
         <p class="uk-text-right">
-            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-            <div class="uk-button uk-button-primary" id="go" type="button">Go</div>
+            <form class="uk-form-stacked">
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-text">Name</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input" id="user_name" type="text" placeholder="Name">
+                </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-select">Your language level</label>
+                    <div class="uk-form-controls">
+                        <select class="uk-select uk-text-center" id="form-stacked-select">
+                            <option class="uk-text-center" id = "level_dont_know">Don't know</option>
+
+                            <option class="uk-text-center" id = "level_a1" >A1</option>
+                            <option class="uk-text-center" id = "level_a2" >A2</option>
+                            
+                            <option class="uk-text-center" id = "level_b1" >B1</option>
+                            <option class="uk-text-center" id = "level_b2" >B2</option>
+
+                            <option class="uk-text-center" id = "level_c1" >C1</option>
+                            <option class="uk-text-center" id = "level_c2" >C2</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="uk-button uk-button-primary" id="go" type="button">Go</div>
         </p>
     </div>
 </div>
@@ -96,14 +120,15 @@ id="countdown_clock">
             <p id="to_do"></p>
             <p>
                 <ul class="uk-list answear_list uk-text-center">
-    <li class="try_list" id="try_1"></li>
-    <li class="try_list" id="try_2"></li>
-    <li class="try_list" id="try_3"></li>
+    <li class="try_list uk-text-danger" id="try_1"></li>
+    <li class="try_list uk-text-danger" id="try_2"></li>
+    <li class="try_list uk-text-danger" id="try_3"></li>
 </ul>
             </p>
             <ul class="uk-list answear_list uk-text-center" id="dont_repead">
             
             </ul>
+            <p>You have <div id="wallet"></div> </p>
         </div>
     </div>
 </div>
@@ -113,7 +138,7 @@ id="countdown_clock">
 
         <legend class="uk-legend uk-text-center">Answer</legend>
 
-        <div class="uk-margin">
+        <div class="uk-margin uk-text-center">
             <input  class="uk-input" type="text" placeholder="Input" id="user_answear" ></input>
  
 
@@ -128,7 +153,7 @@ id="countdown_clock">
 		 </div>
            <!--for chart.js -->
              <canvas class="myChart" width="400" height="40"></canvas>
-
+             <div id="#text"></div>
 
 
 	</section>
